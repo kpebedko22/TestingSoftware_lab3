@@ -1,0 +1,38 @@
+{% load static %}
+
+{% if not request.path == '/cart/' %}
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <div class="container">
+        <a class="navbar-brand" href="{% url 'index' %}">
+            <img src="{% static 'img/logo_new.png' %}" alt="store-logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item {% if request.path == '/' or request.path == '/index' %} active {% endif %}">
+                    <a class="nav-link" href="{% url 'index' %}">Главная</a>
+                </li>
+                <li class="nav-item {% if request.path == '/catalog/' %} active {% endif %}">
+                    <a class="nav-link" href="{% url 'catalog' %}">Каталог</a>
+                </li>
+                <li class="nav-item {% if request.path == '/products-administration/' %} active {% endif %}">
+                    <a class="nav-link" href="{% url 'products-administration' %}">Администрирование товаров</a>
+                </li>
+            </ul>
+            <div class="nav-shopping-bag">
+                <a class="nav-link" href="{% url 'cart' %}">
+                    <i class="fa fa-shopping-cart fa-fw"></i>
+                    <span class="hover">Корзина (</span>
+                    <span class="nav-shopping-bag__num-items">{{ cart.totalItems }}</span>
+                    <span class="hover">)</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+<!-- End Navbar -->
+{% endif %}

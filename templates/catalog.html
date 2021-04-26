@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Каталог{% endblock %}
+{% block content %}
+
+
+<!-- Catalog -->
+<section class="catalog bg-light py-5">
+    <div class="container">
+        <div class="row mb-3">
+            <div class="col">
+                <h3>Все товары</h3>
+            </div>
+        </div>
+
+        <div class="row">
+
+            {% for item in clothes %}
+
+            <div class="col-12 col-sm-6 col-md-6 col-lg-3">
+                <div class="catalog__item">
+                    <a href="{{ item.get_absolute_url }}">
+                        {% if item.imagePath %}
+                        <img src="{{item.imagePath.url}}" class="catalog__item-img" alt="{{ item.clothesName }}">
+                        {% else %}
+                        <img src="{% static 'img/empty.png' %}" class="catalog__item-img" alt="empty-image">
+                        {% endif %}
+
+                        <!-- <img src="img/products/ostindress.jpg" class="catalog__item-img" alt="item-pic"> -->
+                    </a>
+                    <a href="{{ item.get_absolute_url }}">
+                        <div class="catalog__item-info">
+                            <div class="catalog__item-info-name">{{ item.clothesName }}</div>
+                            <div class="catalog__item-info-price">{{ item.price }}&#8381;</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+</section>
+<!-- End Catalog -->
+
+{% endblock %}
